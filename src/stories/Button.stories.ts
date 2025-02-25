@@ -30,6 +30,15 @@ const meta = {
     onClick: { description: "Função opcional para clique" },
     label: { description: "Label do botão" },
     size: { description: "Tamanho" },
+    icon: {
+      description: "Ícono do botão",
+      control: "radio",
+      options: ["Activity", "AirVent", "Airplay"],
+    },
+    loading: {
+      description:
+        "Aponta se o botão deve ser desabilitado e apresentar um ícone de carregamento",
+    },
   },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
@@ -54,6 +63,20 @@ export const Disabled: Story = {
   args: {
     label: "Button",
     disabled: true,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    label: "Button",
+    loading: true,
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    label: "Button",
+    icon: "Airplay",
   },
 };
 

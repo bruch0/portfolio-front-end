@@ -1,6 +1,9 @@
-import { BaseButton } from "./ui/button";
+import { icons, Loader2 } from "lucide-react";
 
-interface ButtonArgs {
+import { BaseButton } from "./ui/button";
+import { Icon } from "./Icon";
+
+export interface ButtonArgs {
   variant?:
     | "link"
     | "default"
@@ -12,12 +15,28 @@ interface ButtonArgs {
   size?: "default" | "sm" | "lg" | "icon";
   className?: string;
   disabled?: boolean;
+  loading?: boolean;
+  icon?: keyof typeof icons;
   onClick?: () => void;
   form?: string;
   label?: string;
   type?: "submit" | "reset" | "button";
 }
 
-export const Button = (args: ButtonArgs) => (
-  <BaseButton {...args}>{args.label}</BaseButton>
+export const Button = ({
+  disabled,
+  loading,
+  label,
+  icon,
+  ...args
+}: ButtonArgs) => (
+  <BaseButton {...args} disabled={disabled || loading}>
+    {loading ? (
+      <Loader2 className="animate-spin" />
+    ) : (
+      <>
+        <Icon name={icon} /> {label}
+      </>
+    )}
+  </BaseButton>
 );
