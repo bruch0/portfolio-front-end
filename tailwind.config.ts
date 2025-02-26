@@ -8,6 +8,11 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 	"./stories/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist:[
+    {
+      pattern: /^(.*?)/,
+    },
+  ],
   theme: {
   	extend: {
   		colors: {
