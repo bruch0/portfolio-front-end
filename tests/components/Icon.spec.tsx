@@ -1,6 +1,7 @@
-import { Icon } from "@/components/Icon";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+
+import { Icon } from "@/components/Icon";
 
 describe("Icon component", () => {
   it("Should render the icon with desired icon", async () => {
