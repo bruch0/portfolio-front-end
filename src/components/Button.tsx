@@ -1,8 +1,9 @@
+import { forwardRef, LegacyRef } from "react";
 import { icons, Loader2 } from "lucide-react";
 
 import { BaseButton } from "./ui/button";
+
 import { Icon } from "./Icon";
-import { forwardRef, LegacyRef } from "react";
 
 export interface ButtonArgs {
   variant?:
