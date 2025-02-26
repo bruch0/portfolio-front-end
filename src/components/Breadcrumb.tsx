@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Dropdown } from "./Dropdown";
 import {
   BaseBreadcrumb,
@@ -13,7 +14,7 @@ interface BreadcrumbArgs {
   options: { label: string; path: string }[];
 }
 
-export const Breadcrumb = ({ options }: BreadcrumbArgs) => {
+export const Breadcrumb = forwardRef(({ options }: BreadcrumbArgs, ref) => {
   const shouldHideSomeOptions = options.length > 4;
   const hiddenOptions = shouldHideSomeOptions
     ? options.slice(1, options.length - 2)
@@ -36,6 +37,7 @@ export const Breadcrumb = ({ options }: BreadcrumbArgs) => {
           <>
             <BreadcrumbItem>
               <Dropdown
+                ref={ref}
                 customTrigger={
                   <BreadcrumbEllipsis className="h-4 w-4 cursor-pointer" />
                 }
@@ -61,4 +63,6 @@ export const Breadcrumb = ({ options }: BreadcrumbArgs) => {
       </BreadcrumbList>
     </BaseBreadcrumb>
   );
-};
+});
+
+Breadcrumb.displayName = "Breadcrumb";

@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { icons, Loader2 } from "lucide-react";
 
 import { BaseButton } from "./ui/button";
@@ -42,3 +41,5 @@ export const Button = forwardRef(
     </BaseButton>
   )
 );
+
+Button.displayName = "Button";

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { forwardRef, ReactElement } from "react";
 import { Button, ButtonArgs } from "./Button";
 import {
   BaseDropdownMenu,
@@ -14,20 +14,19 @@ interface DropdownArgs {
   triggerProps?: ButtonArgs;
 }
 
-export const Dropdown = ({
-  customTrigger,
-  options,
-  triggerProps,
-  disabled,
-}: DropdownArgs) => (
-  <BaseDropdownMenu>
-    <DropdownMenuTrigger asChild disabled={disabled}>
-      {customTrigger ? customTrigger : <Button {...triggerProps} />}
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="w-56">
-      {options?.map((option, i) => (
-        <DropdownMenuItem key={i}>{option}</DropdownMenuItem>
-      ))}
-    </DropdownMenuContent>
-  </BaseDropdownMenu>
+export const Dropdown = forwardRef(
+  ({ customTrigger, options, triggerProps, disabled }: DropdownArgs, ref) => (
+    <BaseDropdownMenu>
+      <DropdownMenuTrigger asChild disabled={disabled}>
+        {customTrigger ? customTrigger : <Button {...triggerProps} ref={ref} />}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        {options?.map((option, i) => (
+          <DropdownMenuItem key={i}>{option}</DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </BaseDropdownMenu>
+  )
 );
+
+Dropdown.displayName = "Dropdown";
