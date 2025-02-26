@@ -5,6 +5,10 @@ export type Product = {
   description: string;
   category: string;
   image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
 };
 
 type Category = string;
@@ -26,8 +30,8 @@ export type IProductRoutes = {
   paginated: (props: PaginatedProducts) => Promise<Product[]>;
   getOne: (props: OneProduct) => Promise<Product>;
   getByCategory: (props: ProductsByCategory) => Promise<Product[]>;
-  create: (props: Product) => Promise<Product>;
-  update: (props: Product) => Promise<Product>;
+  create: (props: Omit<Product, "rating">) => Promise<Omit<Product, "rating">>;
+  update: (props: Omit<Product, "rating">) => Promise<Product>;
   delete: (props: OneProduct) => Promise<Product>;
   getCategories: () => Promise<Category[]>;
 };

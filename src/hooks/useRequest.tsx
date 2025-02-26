@@ -27,6 +27,7 @@ export const useRequest = <
   {
     data: Awaited<ReturnType<F>> | undefined;
     error: Error | undefined;
+    status: number | undefined;
     loading: boolean;
     updateData: (data?: Awaited<ReturnType<F>>) => void;
   }
@@ -35,6 +36,7 @@ export const useRequest = <
     opts?.initialValues
   );
   const [error, setError] = useState<Error | undefined>();
+  const [status, setStatus] = useState<number | undefined>();
   const [loading, setLoading] = useState(false);
 
   const updateData = (data?: Awaited<ReturnType<F>>) => {
@@ -53,10 +55,15 @@ export const useRequest = <
 
       const response = await handler({ ...opts?.params, ...params });
 
-      const value = response as Awaited<ReturnType<F>>;
-      setData(value);
-      if (options?.onSuccess) return await options?.onSuccess(value, params);
-      await opts?.onSuccess?.(value, params);
+      const value = response as {
+        data: Awaited<ReturnType<F>>;
+        status: number;
+      };
+      setData(value.data);
+      setStatus(value.status);
+      if (options?.onSuccess)
+        return await options?.onSuccess(value.data, params);
+      await opts?.onSuccess?.(value.data, params);
     } catch (err) {
       const error = err as AxiosError;
 
@@ -71,5 +78,5 @@ export const useRequest = <
     }
   };
 
-  return [fetch, { data, loading, updateData, error }];
+  return [fetch, { data, loading, updateData, error, status }];
 };
