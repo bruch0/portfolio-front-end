@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Dropdown } from "./Dropdown";
+
 import {
   BaseBreadcrumb,
   BreadcrumbEllipsis,
@@ -9,6 +9,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "./ui/breadcrumb";
+
+import { Dropdown } from "./Dropdown";
 
 interface BreadcrumbArgs {
   options: { label: string; path: string }[];
