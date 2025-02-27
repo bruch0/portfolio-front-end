@@ -22,13 +22,18 @@ export interface TableArgs {
     rating: number;
     category: string;
     image?: { url: string; width: number; height: number };
+    onClick?: () => void;
   }[];
   footer?: ReactElement;
+  rowClassname?: string;
 }
 
 export const Table = forwardRef(
-  ({ title, headers, rows, footer }: TableArgs, ref) => (
-    <BaseTable ref={ref as LegacyRef<HTMLTableElement> | undefined}>
+  ({ title, headers, rows, footer, rowClassname }: TableArgs, ref) => (
+    <BaseTable
+      ref={ref as LegacyRef<HTMLTableElement> | undefined}
+      style={{ height: "100%" }}
+    >
       {title && <TableCaption>{title}</TableCaption>}
       <TableHeader>
         <TableRow>
@@ -39,13 +44,20 @@ export const Table = forwardRef(
       </TableHeader>
       <TableBody>
         {rows.map((row) => (
-          <TableRow key={row.id}>
+          <TableRow
+            key={row.id}
+            className={rowClassname}
+            onClick={row.onClick}
+            style={{ cursor: row.onClick ? "pointer" : "" }}
+          >
             {row.image && (
               <TableCell>
                 <Image
                   src={row.image.url}
                   width={row.image.width}
                   height={row.image.height}
+                  style={{ height: row.image.height, width: row.image.width }}
+                  sizes="100vw"
                   alt=""
                 />
               </TableCell>

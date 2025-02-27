@@ -1,101 +1,210 @@
-import Image from "next/image";
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { Breadcrumb } from "@/components/Breadcrumb";
+import { Button } from "@/components/Button";
+import { Section } from "@/components/Section";
+import { Table } from "@/components/Table";
+import { Typography } from "@/components/Typography";
+
+import { useRequest } from "@/hooks";
+
+import { productService } from "@/services/product";
+import { Icon } from "@/components/Icon";
+import { Dropdown } from "@/components/Dropdown";
+import { categoryService } from "@/services/categories";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [getProducts, { data: products, updateData, loading }] = useRequest(
+    productService.paginated
+  );
+  const [getCategories, { data: categories }] = useRequest(
+    categoryService.getAll
+  );
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  const router = useRouter();
+
+  const [priceOrdering, setPriceOrdering] = useState<
+    "asc" | "desc" | "standard"
+  >("standard");
+
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
+
+  const handleCategory = (newCategory: string) => {
+    if (categoryFilter === newCategory) return setCategoryFilter("");
+
+    setCategoryFilter(newCategory);
+  };
+
+  const PAGE_SIZE = 10;
+  const [page, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  const handlePagination = (step: number) => setPage(page + step);
+
+  const paginatedProducts = products
+    ? products.slice(PAGE_SIZE * page, PAGE_SIZE * (page + 1))
+    : [];
+
+  const orderProducts = (order: "asc" | "desc" | "standard") => {
+    if (!products) return;
+
+    switch (order) {
+      case "standard":
+        updateData(products.sort((a, b) => (a.price > b.price ? -1 : 1)));
+        return setPriceOrdering("asc");
+
+      case "asc":
+        updateData(products.sort((a, b) => (a.price < b.price ? -1 : 1)));
+        return setPriceOrdering("desc");
+
+      case "desc":
+        updateData(products.sort((a, b) => (a.id < b.id ? -1 : 1)));
+        return setPriceOrdering("standard");
+    }
+  };
+
+  useEffect(() => {
+    function handleResize() {
+      const pageWidth = window.innerWidth;
+      const isMobileScreen = pageWidth < 640;
+
+      if (isMobileScreen !== isMobile) {
+        setIsMobile(isMobileScreen);
+      }
+    }
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    getProducts({ category: categoryFilter });
+  }, [categoryFilter]);
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  return (
+    <div className="bg-[#F4F4F5]">
+      <Section height="60px" className="flex items-center bg-[#FFFFFF]">
+        <Icon name="Aperture" size={40} className="ml-[20px] mr-[20px]" />
+        <Typography type="h1">Product Store</Typography>
+      </Section>
+      <Section className="p-[20px]">
+        <Breadcrumb
+          options={[
+            { label: "Dashboard", path: "/" },
+            { label: "Produtos", path: "/" },
+          ]}
+        />
+
+        <Section
+          width="100%"
+          className="bg-[#FFFFFF] p-[20px] h-[83vh] sm:h-[85.5vh] flex flex-col justify-between mt-[20px]"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <div>
+            <div className="flex justify-between mb-[20px]">
+              <div>
+                <Typography type="h1">Produtos</Typography>
+                <Typography type="p">Gerencie seus produtos.</Typography>
+              </div>
+              <div className="flex flex-col  sm:flex-row">
+                <Button
+                  icon="Plus"
+                  label="Adicionar"
+                  className="sm:mr-[10px]"
+                  onClick={() => router.push("/product/add")}
+                />
+                <Button
+                  icon={
+                    priceOrdering === "standard"
+                      ? "ListOrdered"
+                      : priceOrdering === "asc"
+                      ? "ArrowBigUpDash"
+                      : "ArrowBigDownDash"
+                  }
+                  label={
+                    priceOrdering === "standard"
+                      ? "Ordenar"
+                      : priceOrdering === "asc"
+                      ? "Maiores preços"
+                      : "Menores preços"
+                  }
+                  className="sm:mr-[10px] mt-[10px] sm:mt-[0px]"
+                  onClick={() => orderProducts(priceOrdering)}
+                />
+
+                <Dropdown
+                  triggerProps={{
+                    icon: "ListFilter",
+                    label: categoryFilter || "Filtrar",
+                    className: "mt-[10px] sm:mt-[0px]",
+                  }}
+                  options={
+                    categories
+                      ? categories.map((category) => ({
+                          label: category,
+                          onClick: () => handleCategory(category),
+                        }))
+                      : []
+                  }
+                  dropdownTitle="Categorias"
+                />
+              </div>
+            </div>
+
+            <div className="h-[100%] sm:h-[auto]">
+              {products && !loading ? (
+                <Table
+                  headers={["", "Nome", "Preço", "Avaliação", "Categoria"]}
+                  rows={paginatedProducts.map((product) => ({
+                    ...product,
+                    rating: product.rating.rate,
+                    name: product.title,
+                    image: {
+                      url: product.image,
+                      height: isMobile ? 0 : 48,
+                      width: isMobile ? 0 : 48,
+                    },
+                    onClick: () => router.push(`/product/${product.id}`),
+                  }))}
+                />
+              ) : (
+                <div className="animate-pulse rounded-md bg-primary/10 h-[55vh] sm:h-[66vh]" />
+              )}
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <Typography type="p">
+              Mostrando {page * PAGE_SIZE + 1} - {(page + 1) * PAGE_SIZE}{" "}
+              resultados
+            </Typography>
+            <div className="flex">
+              <Button
+                size="icon"
+                variant="ghost"
+                icon="ChevronLeft"
+                onClick={() => handlePagination(-1)}
+                disabled={page === 0}
+              />
+              <Button
+                size="icon"
+                variant="ghost"
+                icon="ChevronRight"
+                className="ml-[10px]"
+                onClick={() => handlePagination(1)}
+                disabled={(page + 1) * PAGE_SIZE === products?.length}
+              />
+            </div>
+          </div>
+        </Section>
+      </Section>
     </div>
   );
 }
