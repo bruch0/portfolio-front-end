@@ -43,7 +43,9 @@ export const Breadcrumb = forwardRef(({ options }: BreadcrumbArgs, ref) => {
                 customTrigger={
                   <BreadcrumbEllipsis className="h-4 w-4 cursor-pointer" />
                 }
-                options={hiddenOptions.map((option) => option.label)}
+                options={hiddenOptions.map((option) => ({
+                  label: option.label,
+                }))}
               />
             </BreadcrumbItem>
             <BreadcrumbSeparator />
