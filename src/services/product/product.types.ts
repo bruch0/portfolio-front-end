@@ -1,7 +1,7 @@
 export type Product = {
   id: number;
   title: string;
-  price: number;
+  price: string;
   description: string;
   category: string;
   image: string;
@@ -29,7 +29,9 @@ export type IProductRoutes = {
   paginated: (props: PaginatedProducts) => Promise<Product[]>;
   getOne: (props: OneProduct) => Promise<Product>;
   getByCategory: (props: ProductsByCategory) => Promise<Product[]>;
-  create: (props: Omit<Product, "rating">) => Promise<Omit<Product, "rating">>;
+  create: (
+    props: Omit<Product, "rating" | "id">
+  ) => Promise<Omit<Product, "rating">>;
   update: (props: Omit<Product, "rating">) => Promise<Product>;
   delete: (props: OneProduct) => Promise<Product>;
   getCategories: () => Promise<Category[]>;

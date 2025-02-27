@@ -6,9 +6,9 @@ import { useState } from "react";
 export type UseRequestOpts<T, K> = {
   initialValues?: T;
   params?: Partial<K>;
-  onSuccess?: (data: T, input: K) => Promise<void>;
-  onError?: (error: AxiosError) => Promise<void>;
-  onFinally?: () => Promise<void>;
+  onSuccess?: (data: T, input: K) => Promise<void> | void;
+  onError?: (error: AxiosError) => Promise<void> | void;
+  onFinally?: () => Promise<void> | void;
 };
 
 export const useRequest = <

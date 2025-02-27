@@ -8,12 +8,12 @@ import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { Table } from "@/components/Table";
 import { Typography } from "@/components/Typography";
+import { Icon } from "@/components/Icon";
+import { Dropdown } from "@/components/Dropdown";
 
 import { useRequest } from "@/hooks";
 
 import { productService } from "@/services/product";
-import { Icon } from "@/components/Icon";
-import { Dropdown } from "@/components/Dropdown";
 import { categoryService } from "@/services/categories";
 
 export default function Home() {
