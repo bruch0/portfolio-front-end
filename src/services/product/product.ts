@@ -3,7 +3,8 @@ import { IProductRoutes } from "./product.types";
 import { api } from "../api";
 
 export const productService: IProductRoutes = {
-  paginated: () => api.get("/products"),
+  paginated: ({ category }) =>
+    api.get(`/products${category ? `/category/${category}` : ""}`),
   getOne: ({ id }) => api.get(`/products/${id}`),
   getByCategory: ({ category }) => api.get(`/products/category/${category}`),
   create: (payload) => api.post("/products", payload),

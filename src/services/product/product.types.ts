@@ -14,8 +14,7 @@ export type Product = {
 type Category = string;
 
 type PaginatedProducts = {
-  limit?: string;
-  sort?: "asc" | "desc";
+  category?: string;
 };
 
 type OneProduct = {
