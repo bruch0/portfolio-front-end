@@ -15,6 +15,8 @@ const meta = {
     },
     triggerProps: { description: "Props de um botão, para personalizar" },
     options: { description: "Opções para o dropdown" },
+    disabled: { description: "Desabilita o dropdown" },
+    dropdownTitle: { description: "Adiciona um título" },
   },
   args: { options: ["Opção 1", "Opção 2", "Opção 3", "Opção 4"] },
 } satisfies Meta<typeof Dropdown>;
@@ -42,5 +44,13 @@ export const Disabled: Story = {
     options: ["Opção 1", "Opção 2", "Opção 3", "Opção 4"],
     disabled: true,
     triggerProps: { label: "Abrir" },
+  },
+};
+
+export const WithTitçe: Story = {
+  args: {
+    options: ["Opção 1", "Opção 2", "Opção 3", "Opção 4"],
+    triggerProps: { label: "Abrir" },
+    dropdownTitle: "Título",
   },
 };

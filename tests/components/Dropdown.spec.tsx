@@ -42,4 +42,20 @@ describe("Dropdown component", () => {
 
     expect(option).toBeDefined();
   });
+
+  it("Should render the title when opened", async () => {
+    render(
+      <Dropdown
+        triggerProps={{ label: "Label" }}
+        dropdownTitle="Title"
+        options={["Option 1"]}
+      />
+    );
+    const button = screen.getByRole("button");
+    fireEvent.pointerDown(button);
+
+    const option = screen.getByText("Title");
+
+    expect(option).toBeDefined();
+  });
 });
