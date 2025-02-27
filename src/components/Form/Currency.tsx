@@ -29,8 +29,6 @@ export const formatCurrency = (value: string) => {
     "."
   );
 
-  console.log(`${formattedIntegerPart},${decimalPart}`);
-
   return `${formattedIntegerPart},${decimalPart}`;
 };
 
