@@ -18,7 +18,7 @@ export interface TableArgs {
   rows: {
     id: number;
     name: string;
-    price: number;
+    price: string;
     rating: number;
     category: string;
     image?: { url: string; width: number; height: number };
@@ -66,7 +66,7 @@ export const Table = forwardRef(
               {row.name}
             </TableCell>
             <TableCell className="max-w-[230px] overflow-hidden text-ellipsis whitespace-nowrap">
-              {row.price.toLocaleString("pt-BR", {
+              {Number(row.price).toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}
