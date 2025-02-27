@@ -13,7 +13,7 @@ import { Button, ButtonArgs } from "./Button";
 
 interface DropdownArgs {
   customTrigger?: ReactElement;
-  options?: string[];
+  options?: { label: string; onClick?: (args: never) => void }[];
   disabled?: boolean;
   triggerProps?: ButtonArgs;
   dropdownTitle?: string;
@@ -42,7 +42,9 @@ export const Dropdown = forwardRef(
           </>
         )}
         {options?.map((option, i) => (
-          <DropdownMenuItem key={i}>{option}</DropdownMenuItem>
+          <DropdownMenuItem key={i} onClick={option.onClick}>
+            {option.label}
+          </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
     </BaseDropdownMenu>

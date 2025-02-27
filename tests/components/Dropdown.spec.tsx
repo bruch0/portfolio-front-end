@@ -33,7 +33,10 @@ describe("Dropdown component", () => {
 
   it("Should render the options after the trigger click", async () => {
     render(
-      <Dropdown triggerProps={{ label: "Label" }} options={["Option 1"]} />
+      <Dropdown
+        triggerProps={{ label: "Label" }}
+        options={[{ label: "Option 1", onClick: () => jest.fn() }]}
+      />
     );
     const button = screen.getByRole("button");
     fireEvent.pointerDown(button);
@@ -48,7 +51,7 @@ describe("Dropdown component", () => {
       <Dropdown
         triggerProps={{ label: "Label" }}
         dropdownTitle="Title"
-        options={["Option 1"]}
+        options={[{ label: "Option 1", onClick: () => jest.fn() }]}
       />
     );
     const button = screen.getByRole("button");
@@ -57,5 +60,24 @@ describe("Dropdown component", () => {
     const option = screen.getByText("Title");
 
     expect(option).toBeDefined();
+  });
+
+  it("Should call the function when option is clicked", async () => {
+    const mockFn = jest.fn();
+
+    render(
+      <Dropdown
+        triggerProps={{ label: "Label" }}
+        dropdownTitle="Title"
+        options={[{ label: "Option 1", onClick: mockFn }]}
+      />
+    );
+    const button = screen.getByRole("button");
+    fireEvent.pointerDown(button);
+
+    const option = screen.getByText("Option 1");
+    fireEvent.click(option);
+
+    expect(mockFn).toHaveBeenCalled();
   });
 });
