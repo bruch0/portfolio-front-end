@@ -52,7 +52,7 @@ export const Table = forwardRef(
             style={{ cursor: row.onClick ? "pointer" : "" }}
           >
             {row.image && (
-              <TableCell>
+              <TableCell className="sm:p-2">
                 <Image
                   src={row.image.url}
                   width={row.image.width}
