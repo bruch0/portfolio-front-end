@@ -24,7 +24,6 @@ type FormProps<T extends FieldValues> = {
   onSubmit: SubmitHandler<T>;
   schema: ZodSchema<T>;
   defaultValues?: DefaultValues<T>;
-  disabled?: boolean;
   children:
     | ((props: {
         reset: (values: T) => void;
