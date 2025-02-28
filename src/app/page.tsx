@@ -39,9 +39,9 @@ export default function Home() {
     setCategoryFilter(newCategory);
   };
 
-  const PAGE_SIZE = 10;
   const [page, setPage] = useState(0);
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const PAGE_SIZE = isMobile ? 5 : 10;
 
   const handlePagination = (step: number) => setPage(page + step);
 
@@ -183,7 +183,9 @@ export default function Home() {
 
           <div className="flex justify-between items-center">
             <Typography type="p">
-              Mostrando {page * PAGE_SIZE + 1} - {(page + 1) * PAGE_SIZE}{" "}
+              Mostrando {page * PAGE_SIZE + 1} -{" "}
+              {products?.length &&
+                Math.min((page + 1) * PAGE_SIZE, products.length)}{" "}
               resultados
             </Typography>
             <div className="flex">
@@ -200,7 +202,11 @@ export default function Home() {
                 icon="ChevronRight"
                 className="ml-[10px]"
                 onClick={() => handlePagination(1)}
-                disabled={(page + 1) * PAGE_SIZE === products?.length}
+                disabled={
+                  products?.length
+                    ? (page + 1) * PAGE_SIZE >= products?.length
+                    : true
+                }
               />
             </div>
           </div>
