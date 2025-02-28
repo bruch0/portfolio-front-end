@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "./ui/table";
 import Image from "next/image";
+import { Badge } from "./Badge";
 
 export interface TableArgs {
   title?: string;
@@ -64,6 +65,8 @@ export const Table = forwardRef(
             )}
             <TableCell className="max-w-[230px] overflow-hidden text-ellipsis whitespace-nowrap">
               {row.name}
+              <br />
+              {row.rating > 4.5 && <Badge variant="default">Destaque</Badge>}
             </TableCell>
             <TableCell className="max-w-[230px] overflow-hidden text-ellipsis whitespace-nowrap">
               {Number(row.price).toLocaleString("pt-BR", {

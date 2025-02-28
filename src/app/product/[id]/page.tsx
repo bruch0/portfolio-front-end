@@ -18,6 +18,7 @@ import { productService } from "@/services/product";
 import { toast } from "@/components/Toast";
 import { SkeletonLoading } from "../SkeletonLoading";
 import { Dialog } from "@/components/Dialog";
+import { Badge } from "@/components/Badge";
 
 export default function Home() {
   const [getProductDetails, { data: productDetails, loading }] = useRequest(
@@ -126,7 +127,7 @@ export default function Home() {
           options={[
             { label: "Dashboard", path: "/" },
             { label: "Produtos", path: "/" },
-            { label: "Adicionar um produto", path: "/" },
+            { label: "Detalhes do produto", path: "/" },
           ]}
         />
         <ScrollArea className="h-[71vh] sm:h-full">
@@ -143,15 +144,22 @@ export default function Home() {
           >
             <div className="sm:flex flex-row justify-between sm:h-[70vh]">
               <Section className="bg-[#FFFFFF] p-[20px] flex flex-col mt-[20px] sm:w-[69%]">
-                <Typography type="h2">Adicionar um produto</Typography>
-                <Typography type="p" className="mb-[20px]">
-                  Insira as informações do novo produto.
+                <Typography type="h2">{productDetails?.title}</Typography>
+                <Typography type="p" className="mb-[10px]">
+                  Informações do produto
                 </Typography>
+                {productDetails
+                  ? productDetails.rating.rate > 4.5 && (
+                      <Badge variant="default" className="w-fit">
+                        Destaque
+                      </Badge>
+                    )
+                  : ""}
                 <Form.Input
                   name="title"
                   label="Nome"
                   placeholder="Nome do produto..."
-                  className="mb-[10px]"
+                  className="mb-[10px] mt-[20px]"
                   disabled={!isEditing}
                 />
                 <Form.Currency
