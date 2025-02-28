@@ -16,14 +16,14 @@ import { AspectRatio } from "../ui/aspect-ratio";
 type TextImageProps = {
   name: string;
   label?: string;
-  defaultValue?: string;
+  defaultImageUrl?: string;
   placeholder?: string;
   disabled?: boolean;
   className?: string;
 };
 export const ImageUpload = ({
   name,
-  defaultValue,
+  defaultImageUrl,
   label,
   placeholder,
   disabled,
@@ -35,7 +35,6 @@ export const ImageUpload = ({
   const { field } = useController({
     name,
     control,
-    defaultValue,
   });
 
   //@ts-expect-error - Typagem gera erros com a prop onChange do Input
@@ -66,9 +65,13 @@ export const ImageUpload = ({
             />
           </FormControl>
           <AspectRatio ratio={16 / 15.2} className="bg-muted">
-            {selectedImage && (
+            {(selectedImage || defaultImageUrl) && (
               <Image
-                src={URL.createObjectURL(selectedImage)}
+                src={
+                  selectedImage
+                    ? URL.createObjectURL(selectedImage)
+                    : (defaultImageUrl as string)
+                }
                 alt="Thumb"
                 fill
                 className="h-full w-full rounded-md object-cover"

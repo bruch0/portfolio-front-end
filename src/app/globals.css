@@ -7,6 +7,20 @@
 @layer base {
   :root {
 
+    .star-rating {
+      position: relative;
+    }
+  
+    .stars {
+      display: flex;
+      gap: 4px;
+    }
+  
+    .rating {
+      position: absolute;
+      top: 0;
+    }
+
     --background: 0 0% 100%;
 
     --foreground: 0 0% 3.9%;
