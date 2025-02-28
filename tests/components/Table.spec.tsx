@@ -23,14 +23,14 @@ describe("Table component", () => {
           {
             id: 1,
             name: "Product Name 1",
-            price: 1,
+            price: "1",
             category: "Category 1",
             rating: 4,
           },
           {
             id: 2,
             name: "Product Name 2",
-            price: 2,
+            price: "2",
             category: "Category 2",
             rating: 5,
           },
@@ -65,7 +65,7 @@ describe("Table component", () => {
           {
             id: 1,
             name: "Product Name 1",
-            price: 1,
+            price: "1",
             category: "Category 1",
             rating: 4,
             image: {
