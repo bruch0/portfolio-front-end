@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 
-export interface TypographyProps {
+export interface TypographyArgs {
   className?: string;
   width?: string;
   height?: string;
@@ -11,7 +11,7 @@ export const Section = ({
   children,
   height,
   width,
-}: PropsWithChildren<TypographyProps>) => (
+}: PropsWithChildren<TypographyArgs>) => (
   <div
     style={{
       width,

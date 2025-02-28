@@ -1,11 +1,11 @@
 import { LucideProps, icons } from "lucide-react";
 
-export interface IconProps extends LucideProps {
+export interface IconArgs extends LucideProps {
   name?: keyof typeof icons;
   size?: number;
 }
 
-export const Icon = ({ name, size, ...props }: IconProps) => {
+export const Icon = ({ name, size, ...props }: IconArgs) => {
   if (!name) return null;
   const LucideIcon = icons[name];
   if (!LucideIcon) return null;

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 
-export interface TypographyProps {
+export interface TypographyArgs {
   type: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
   className?: string;
 }
@@ -9,7 +9,7 @@ export const Typography = ({
   type,
   className,
   children,
-}: PropsWithChildren<TypographyProps>) => {
+}: PropsWithChildren<TypographyArgs>) => {
   switch (type) {
     case "h1":
       return (

@@ -4,7 +4,7 @@ import React from "react";
 import { toast as sonnerToast } from "sonner";
 
 /** A fully custom toast that still maintains the animations and interactions. */
-function CustomToast(props: ToastProps) {
+function CustomToast(props: ToastArgs) {
   const { title, variant } = props;
 
   const variantClass = {
@@ -26,13 +26,13 @@ function CustomToast(props: ToastProps) {
   );
 }
 
-export const toast = (toast: Omit<ToastProps, "id">) => {
+export const toast = (toast: Omit<ToastArgs, "id">) => {
   return sonnerToast.custom((id) => <CustomToast id={id} {...toast} />, {
     position: "top-center",
   });
 };
 
-interface ToastProps {
+interface ToastArgs {
   id: string | number;
   title: string;
   variant: "success" | "error" | "info";
