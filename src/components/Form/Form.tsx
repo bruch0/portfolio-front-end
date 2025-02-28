@@ -49,6 +49,7 @@ export const Form = <T extends FieldValues>(props: FormProps<T>) => {
         id={formId}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8"
+        role="form"
       >
         {typeof children === "function"
           ? children({

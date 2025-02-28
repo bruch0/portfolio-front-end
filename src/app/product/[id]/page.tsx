@@ -294,8 +294,8 @@ export default function Home() {
                     }
                     title="Confirmar exclusão"
                     description="Ao confirmar, esse produto será excluído para sempre"
-                    cancelText={"Cancelar"}
-                    confirmText={"Confirmar"}
+                    cancelText="Cancelar"
+                    confirmText="Confirmar"
                     confirmFunction={handleDelete}
                   />
                 </div>
