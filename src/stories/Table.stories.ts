@@ -29,17 +29,15 @@ export const Basic: Story = {
       {
         id: 1,
         name: "Fjallraven ",
-        price: 109.95,
+        price: "109.95",
         category: "men's clothing",
         rating: 3.9,
       },
       {
         id: 2,
         name: "Mens Casual ",
-        price: 22.3,
+        price: "22.3",
         category: "men's clothing",
-        // image:
-        //   "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
         rating: 4.1,
       },
     ],
@@ -53,7 +51,7 @@ export const WithImage: Story = {
       {
         id: 1,
         name: "Fjallraven ",
-        price: 109.95,
+        price: "109.95",
         category: "men's clothing",
         image: {
           url: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
@@ -65,7 +63,7 @@ export const WithImage: Story = {
       {
         id: 2,
         name: "Mens Casual ",
-        price: 22.3,
+        price: "22.3",
         category: "men's clothing",
         image: {
           url: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
@@ -85,14 +83,14 @@ export const WithEllipsis: Story = {
       {
         id: 1,
         name: "Super Long Name of Product To Show Ellipsis",
-        price: 109.95,
+        price: "109.95",
         category: "men's clothing",
         rating: 3.9,
       },
       {
         id: 2,
         name: "Super Long Name of Product To Show Ellipsis",
-        price: 22.3,
+        price: "22.3",
         category: "men's clothing",
         rating: 4.1,
       },
