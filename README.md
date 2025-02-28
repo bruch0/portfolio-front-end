@@ -4,10 +4,10 @@
 
 ## Explicando o case
 
-    Implementação de um enxuto sistema que tem conexão com a [FakeStoreAPI]('https://fakestoreapi.com/'). <br><br>
-    Features: <br>
-    Contém uma listagem dos produtos em tabela <br>
-    Contém uma página para criação de um produto <br>
+    Implementação de um enxuto sistema que tem conexão com a [FakeStoreAPI]('https://fakestoreapi.com/').
+    Features: 
+    Contém uma listagem dos produtos em tabela 
+    Contém uma página para criação de um produto 
     Contém uma página para visualização detalhada de um produto
     - Nessa página é possível editar e apagar o produto
 
