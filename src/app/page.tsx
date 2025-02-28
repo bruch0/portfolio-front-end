@@ -15,6 +15,7 @@ import { useRequest } from "@/hooks";
 
 import { productService } from "@/services/product";
 import { categoryService } from "@/services/categories";
+import { Skeleton } from "@/components/Skeleton";
 
 export default function Home() {
   const [getProducts, { data: products, updateData, loading }] = useRequest(
@@ -175,7 +176,7 @@ export default function Home() {
                   }))}
                 />
               ) : (
-                <div className="animate-pulse rounded-md bg-primary/10 h-[55vh] sm:h-[66vh]" />
+                <Skeleton className="h-[55vh] sm:h-[66vh]" />
               )}
             </div>
           </div>
