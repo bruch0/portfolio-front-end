@@ -53,9 +53,8 @@ export default function Home() {
   const onFormError = () => {
     toast({
       title: "Ocorreu um erro, tente novamente mais tarde",
-      variant: "success",
+      variant: "error",
     });
-    router.push("/");
   };
 
   const onSubmitForm = (data: z.infer<typeof schema>) => {
@@ -136,7 +135,11 @@ export default function Home() {
                 <Typography type="h2" className="mb-[20px]">
                   Categoria do produto
                 </Typography>
-                <Form.Select name="category" options={categories || []} />
+                <Form.Select
+                  name="category"
+                  options={categories || []}
+                  disabled={!!categories}
+                />
               </Section>
 
               <Section className="bg-[#FFFFFF] p-[20px] flex flex-col fixed bottom-0 left-0 w-[100vw] sm:relative sm:w-[30%]">
