@@ -91,3 +91,6 @@ npm run storybook -> Inicia o StoryBook na porta 6006
 
     - compoments
         - Contém os teste com Jest dos componentes
+
+### Design
+    Foi utilizado esse Figma construído por mim como base para o design - https://www.figma.com/design/SN9yCbrZZ9yVbmi8nM1FpY/Design?node-id=0-1&t=jr2sEO5A8xsV0KRq-1
