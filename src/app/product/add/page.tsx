@@ -68,6 +68,8 @@ export default function Home() {
     getCategories();
   }, []);
 
+  console.log(categories);
+
   return (
     <div className="bg-[#F4F4F5]">
       <Section height="60px" className="flex items-center bg-[#FFFFFF]">
@@ -138,7 +140,7 @@ export default function Home() {
                 <Form.Select
                   name="category"
                   options={categories || []}
-                  disabled={!!categories}
+                  disabled={!categories}
                 />
               </Section>
 
