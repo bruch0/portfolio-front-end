@@ -10,12 +10,12 @@ import { Table } from "@/components/Table";
 import { Typography } from "@/components/Typography";
 import { Icon } from "@/components/Icon";
 import { Dropdown } from "@/components/Dropdown";
+import { Skeleton } from "@/components/Skeleton";
 
 import { useRequest } from "@/hooks";
 
 import { productService } from "@/services/product";
 import { categoryService } from "@/services/categories";
-import { Skeleton } from "@/components/Skeleton";
 
 export default function Home() {
   const [getProducts, { data: products, updateData, loading }] = useRequest(

@@ -11,14 +11,14 @@ import { Typography } from "@/components/Typography";
 import { Icon } from "@/components/Icon";
 import { ScrollArea } from "@/components/ScrollArea";
 import { Form } from "@/components/Form";
+import { Dialog } from "@/components/Dialog";
+import { Badge } from "@/components/Badge";
+import { toast } from "@/components/Toast";
+import { SkeletonLoading } from "../SkeletonLoading";
 
 import { useRequest } from "@/hooks";
 
 import { productService } from "@/services/product";
-import { toast } from "@/components/Toast";
-import { SkeletonLoading } from "../SkeletonLoading";
-import { Dialog } from "@/components/Dialog";
-import { Badge } from "@/components/Badge";
 
 export default function Home() {
   const [getProductDetails, { data: productDetails, loading }] = useRequest(
