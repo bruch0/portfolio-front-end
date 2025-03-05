@@ -11,12 +11,12 @@ import { Typography } from "@/components/Typography";
 import { Icon } from "@/components/Icon";
 import { ScrollArea } from "@/components/ScrollArea";
 import { Form } from "@/components/Form";
+import { toast } from "@/components/Toast";
 
 import { useRequest } from "@/hooks";
 
 import { categoryService } from "@/services/categories";
 import { productService } from "@/services/product";
-import { toast } from "@/components/Toast";
 
 export default function Home() {
   const [getCategories, { data: categories }] = useRequest(
